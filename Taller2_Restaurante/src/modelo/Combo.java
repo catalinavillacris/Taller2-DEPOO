@@ -20,7 +20,7 @@ public class Combo implements Producto {
 	
 	public double getPrecio() {
 		int precio=0;
-		for (Producto item:itemsCombo) {
+		for (Producto item:this.itemsCombo) {
 			precio += item.getPrecio();
 		}
 		return precio *= this.descuento;
@@ -43,6 +43,15 @@ public class Combo implements Producto {
 	public String getNombre() {
 		// TODO Auto-generated method stub
 		return this.nombre;
+	}
+
+	@Override
+	public int getCalorias() {
+		int calorias=0;
+		for(Producto item:this.itemsCombo) {
+			calorias+=item.getCalorias();
+		}
+		return calorias;
 	}
 
 }

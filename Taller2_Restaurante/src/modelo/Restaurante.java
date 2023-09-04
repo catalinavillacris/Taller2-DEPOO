@@ -11,12 +11,14 @@ public class Restaurante {
 
 	private ArrayList<Ingrediente> ingredientes;
 	private ArrayList<Producto> menu;
+	private ArrayList<Producto> bebidas;
 	private ArrayList<Combo> combos;
 	private Pedido curso;
 
 	public Restaurante() {
 		this.ingredientes = new ArrayList<Ingrediente>() ;
 		this.menu = new ArrayList<Producto>();
+		this.bebidas = new ArrayList<Producto>();
 		this.combos = new ArrayList<Combo>();
 	}
 
@@ -46,10 +48,11 @@ public class Restaurante {
 		return this.ingredientes;
 	}
 
-	public void cargarInformacionRestaurante (File archivoIngredientes,File archivoCombos, File archivoMenu) throws IOException {
+	public void cargarInformacionRestaurante (File archivoIngredientes,File archivoCombos, File archivoMenu,File bebidas) throws IOException {
 		cargarMenu( archivoMenu);
 		cargarIngredientes( archivoIngredientes);
 		cargarCombos( archivoCombos);
+		cargarBebidas(bebidas);
 		
 	}
 
@@ -79,7 +82,7 @@ public class Restaurante {
 			String linea;
 			while((linea=br.readLine())!=null) {
 				String[] info= linea.split(";");
-				ProductoMenu producto= new ProductoMenu(info[0],Double.parseDouble(info[1]));
+				ProductoMenu producto= new ProductoMenu(info[0],Double.parseDouble(info[1]),Integer.parseInt(info[2]));
 				this.menu.add(producto);
 				}
 			br.close();
@@ -90,6 +93,29 @@ public class Restaurante {
 
 		
 	}
+	
+	private void cargarBebidas(File bebidas) throws IOException{
+		
+			
+			try {
+				FileReader fr=new FileReader(bebidas);
+				BufferedReader br =new BufferedReader(fr);
+				String linea;
+				while((linea=br.readLine())!=null) {
+					String[] info= linea.split(";");
+					ProductoMenu producto= new ProductoMenu(info[0],Double.parseDouble(info[1]),Integer.parseInt(info[2]));
+					this.bebidas.add(producto);
+					}
+				br.close();
+				}catch (FileNotFoundException e) {
+					System.out.println("\nNo se encontro el archivo");
+					e.printStackTrace();
+				}
+
+			
+		}
+
+	
 		
 	private void cargarCombos(File archivoCombos) throws IOException {
 		try {
@@ -101,16 +127,22 @@ public class Restaurante {
 				String[] descuento = info[1].split("%");
 				ArrayList<Producto> items =new ArrayList<Producto>();
 				ArrayList<Producto> menu= getMenuBase();
+				ArrayList<Producto> bebidas= this.bebidas;
 				
 				for (int i=2;i<=info.length-2;i=i+1) {
 					for (Producto p:menu) {
 						if(info[i].equals(p.getNombre())) {
 							items.add(p);
 						}
-					}	
+					}
+					for (Producto p:bebidas) {
+						if(info[i].equals(p.getNombre())) {
+							items.add(p);
+						}
 				}
 				Combo combo = new Combo(Integer.parseInt(descuento[0]),info[0],items);
 				this.combos.add(combo);
+			}
 			}
 			br.close();
 		} catch (FileNotFoundException e) {

@@ -22,8 +22,10 @@ public class Aplicacion {
 		File ingredientes= new File("/Users/catalinavillacris/Desktop/DPOO_wks/Taller2_Restaurante/data/ingredientes.txt");
 		File menu=new File("/Users/catalinavillacris/Desktop/DPOO_wks/Taller2_Restaurante/data/menu.txt");
 		File combos=new File ("/Users/catalinavillacris/Desktop/DPOO_wks/Taller2_Restaurante/data/combos.txt");
+		File bebidas=new File ("/Users/catalinavillacris/Desktop/DPOO_wks/Taller2_Restaurante/data/bebidas.txt");
 		
-		restaurante.cargarInformacionRestaurante(ingredientes,combos,menu);		
+		
+		restaurante.cargarInformacionRestaurante(ingredientes,combos,menu,bebidas);		
 	}
 	
 	private void ejecutarMenu() {
@@ -119,7 +121,7 @@ public class Aplicacion {
 				restaurante.getPedidoEnCurso().agregarProducto(pedido);
 			
 		}else if("No".equals(add) && "No".equals(sus)) {
-			Producto pedido=new ProductoMenu(menu.get(index-1).getNombre(),menu.get(index-1).getPrecio());
+			Producto pedido=new ProductoMenu(menu.get(index-1).getNombre(),menu.get(index-1).getPrecio(),menu.get(index-1).getCalorias());
 			restaurante.getPedidoEnCurso().agregarProducto(pedido);
 		}else {
 			System.out.println("la Seleccion no existe");

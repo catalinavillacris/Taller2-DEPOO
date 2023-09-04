@@ -10,6 +10,7 @@ import java.util.Random;
 public class Pedido {
 	
 	private static int numeroPedidos;
+	
 	private int idPedido;
 	private String nombreCliente;
 	private String direccionCliente;
@@ -42,6 +43,15 @@ public class Pedido {
 		return precio;
 	}
 	
+	private int getCalorias() {
+		int calorias=0;
+		
+		for (Producto item:this.items)
+			calorias+=item.getCalorias();
+		
+		return calorias;
+	}
+	
 	private double getPrecioIvaPedido() {
 		return getPrecioNetoPedido() * 0.19;
 	}
@@ -56,6 +66,7 @@ public class Pedido {
 		for (Producto item: this.items){
 			factura += item.generarTextoFactura() + "\n";
 		}
+		factura+="Calorias totales "+ String.valueOf(getCalorias())+"\n";
 		factura +="BASE		" + String.valueOf(getPrecioNetoPedido())+"\n";
 		factura +="IVA		" + String.valueOf(getPrecioIvaPedido())+"\n";
 		factura +="TOTAL		" + String.valueOf(getPrecioTotalPedido())+"\n";
@@ -81,5 +92,7 @@ public class Pedido {
 		}
 		return id + "\n" + this.nombreCliente + "\n"  +this.direccionCliente + "\n" + productos;
 	}
+	
+	
 
 }

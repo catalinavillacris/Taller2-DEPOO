@@ -48,6 +48,12 @@ public class ProductoAjustado implements Producto {
 		
 		return factura;
 	}
+
+	@Override
+	public int getCalorias() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 
 }

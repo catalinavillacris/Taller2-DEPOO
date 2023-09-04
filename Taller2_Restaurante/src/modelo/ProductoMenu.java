@@ -4,10 +4,12 @@ public class ProductoMenu implements Producto {
 	
 	private String nombre;
 	private double precioBase;
+	private int calorias;
 	
-	public ProductoMenu (String nombre, double precio) {
+	public ProductoMenu (String nombre, double precio,int calorias) {
 		this.nombre=nombre;
 		this.precioBase=precio;
+		this.calorias=calorias;
 	}
 	
 	public String getNombre() {
@@ -16,6 +18,10 @@ public class ProductoMenu implements Producto {
 	
 	public double getPrecio(){
 		return this.precioBase;
+	}
+	
+	public int getCalorias() {
+		return this.calorias;
 	}
 	
 	public String generarTextoFactura() {

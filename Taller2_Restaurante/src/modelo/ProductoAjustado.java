@@ -5,11 +5,13 @@ import java.util.ArrayList;
 public class ProductoAjustado implements Producto {
 	
 	private Producto base;
+	private int calorias;
 	private ArrayList<Ingrediente> agregados;
 	private ArrayList<Ingrediente> eliminados;
 	
 	public ProductoAjustado(Producto base, ArrayList<Ingrediente> agregados,ArrayList<Ingrediente> eliminados) {
 		this.base=base;
+		this.calorias=base.getCalorias();
 		this.agregados=agregados;
 		this.eliminados=eliminados;
 	}
@@ -51,8 +53,7 @@ public class ProductoAjustado implements Producto {
 
 	@Override
 	public int getCalorias() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.getCalorias();
 	}
 	
 

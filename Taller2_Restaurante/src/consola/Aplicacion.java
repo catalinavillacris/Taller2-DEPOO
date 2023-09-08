@@ -149,7 +149,15 @@ public class Aplicacion {
 		
 		if(idCliente.equals(String.valueOf(curso.getIdPedido()))) {
 			File facturas=new File("/Users/catalinavillacris/Desktop/DPOO_wks/Taller2_Restaurante/data/facturas.txt");
-			restaurante.cerrarYGuardarPedido(facturas);
+			boolean equal=restaurante.cerrarYGuardarPedido(facturas);
+			String verEqual= input("¿Desea consultar si existe un pedido igual?");
+				if (verEqual.equals("Si")) {
+					if (equal) {
+						System.out.println("\nSe encontro al menos un pedido identico ");
+					}else {
+						System.out.println("\nNo se encontraron pedido similares ");
+					}
+				}
 		}else {
 			System.out.println("\nNo se enconto este pedido en curso");
 		}

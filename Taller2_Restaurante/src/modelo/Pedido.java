@@ -9,8 +9,7 @@ import java.util.Random;
 
 public class Pedido {
 	
-	private static int numeroPedidos;
-	
+	private static ArrayList<Pedido> pedidos;
 	private int idPedido;
 	private String nombreCliente;
 	private String direccionCliente;
@@ -18,12 +17,13 @@ public class Pedido {
 	
 	public Pedido(String nombre, String direccion) {
 		
-		numeroPedidos++;
+		
 		Random id= new Random();
 		int rand_id = id.nextInt(1000);
 		this.idPedido=rand_id;
 		this.nombreCliente=nombre;
 		this.direccionCliente=direccion;
+		Pedido.pedidos= new ArrayList<Pedido>();
 	}
 	
 	public int getIdPedido() {
@@ -73,6 +73,10 @@ public class Pedido {
 		return factura;
 	}
 	
+	public void guardarPedido(Pedido pedido) {
+		Pedido.pedidos.add(pedido);
+	}
+	
 	public void guardarFactura(File archivo) {
 		try {
 		    BufferedWriter writer = new BufferedWriter(new FileWriter(archivo.getName(), true));
@@ -93,6 +97,29 @@ public class Pedido {
 		return id + "\n" + this.nombreCliente + "\n"  +this.direccionCliente + "\n" + productos;
 	}
 	
-	
+
+	public boolean equals(Pedido pedido) {
+		boolean equal=false;
+		for(Pedido i:Pedido.pedidos) {
+			if (pedido.items.size()==i.items.size()) {
+			int num=0;
+			boolean is=true;
+			do{
+				if(i.items.get(num).equals(pedido.items.get(num))) {
+					num++;
+				}else {
+					is=false;
+				}
+				
+			}while (num<=i.items.size()&&is);
+			if(is) {
+				equal=true;
+				break;
+			}
+			}
+		}
+		return equal;
+		
+	}
 
 }

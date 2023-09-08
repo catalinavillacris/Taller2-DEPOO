@@ -31,9 +31,13 @@ public class Restaurante {
 		return this.curso;
 	}
 
-	public void cerrarYGuardarPedido(File archivo) {
+	public boolean cerrarYGuardarPedido(File archivo) {
 		curso.guardarFactura(archivo);
+		boolean equal=curso.equals(curso);
+		curso.guardarPedido(curso);
 		this.curso = null;
+		
+		return equal;
 	}
 
 	public ArrayList<Producto> getMenuBase() {
